@@ -22,6 +22,7 @@ function upToDate(hash) {
 module.exports = function(hash, moduleMap, options) {
   var reload = options.reload;
   if (!upToDate(hash) && module.hot.status() == "idle") {
+    window.__webpack_hmr_finished = false;
     if (options.log) console.log("[HMR] Checking for updates on the server...");
     check();
   }
@@ -80,6 +81,7 @@ module.exports = function(hash, moduleMap, options) {
 
       if (upToDate()) {
         console.log("[HMR] App is up to date.");
+        window.__webpack_hmr_finished = true;
       }
     }
   }
